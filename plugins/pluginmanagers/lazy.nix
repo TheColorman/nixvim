@@ -101,6 +101,8 @@ in
                 in case it can not be determined automatically. See config()
               '';
 
+              build = helpers.mkNullOrLuaFn "build is executed when a plugin is installed or updated.";
+
               submodules = helpers.defaultNullOpts.mkBool true ''
                 When false, git submodules will not be fetched.
                 Defaults to true
@@ -186,6 +188,7 @@ in
                 keys
                 lazy
                 main
+                build
                 module
                 name
                 optional
