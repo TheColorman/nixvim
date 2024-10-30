@@ -50,6 +50,10 @@ in
         nullable = true;
       };
 
+      config =
+        with lib.types;
+        helpers.mkNullOrOption (maybeRaw (attrsOf anything)) "Additional options passed to lazy.vim's setup function.";
+
       plugins =
         with types;
         let
@@ -222,7 +226,8 @@ in
               patterns = {"."},
               fallback = false
             },
-            spec = ${helpers.toLuaObject packedPlugins}
+            spec = ${helpers.toLuaObject packedPlugins},
+            ${helpers.toLuaObject cfg.config}
           }
         )
       '';
